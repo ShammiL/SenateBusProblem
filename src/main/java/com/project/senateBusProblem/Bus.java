@@ -9,7 +9,7 @@ public class Bus implements Runnable{
     private final Semaphore bus;
     private final Semaphore boarded;
 
-    public Bus(int n, Semaphore mutex, Semaphore bus, Semaphore boarded) {
+    public Bus(Semaphore mutex, Semaphore bus, Semaphore boarded) {
         this.mutex = mutex;
         this.bus = bus;
         this.boarded = boarded;
