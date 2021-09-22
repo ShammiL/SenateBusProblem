@@ -31,6 +31,7 @@ public class Bus implements Runnable{
             mutex.release();
 
             System.out.println(String.format("Bus %d departed with %d riders", count, n));
+            System.out.println(String.format("%d riders waiting", Config.getWaiting()));
 
         } catch (InterruptedException e) {
             e.printStackTrace();
