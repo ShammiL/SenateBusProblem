@@ -4,7 +4,6 @@ import java.util.concurrent.Semaphore;
 
 public class Bus implements Runnable{
 
-    private int waiting = 0;
     private int n;
     private final Semaphore mutex;
     private final Semaphore bus;
@@ -20,12 +19,12 @@ public class Bus implements Runnable{
     public void run() {
         try {
             mutex.acquire();
-            n = Math.min(waiting, 50);
+            n = Math.min(Config.getWaiting(), Config.MAX_BUS_CAPACITY);
             for (int i=0; i<n; i++) {
                 bus.release();
                 boarded.acquire();
             }
-            waiting = Math.max(waiting-50, 0);
+            Config.setWaiting(Math.max(Config.getWaiting()-Config.MAX_BUS_CAPACITY, 0));
             mutex.release();
 
             depart();

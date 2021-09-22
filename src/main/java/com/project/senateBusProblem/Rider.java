@@ -4,7 +4,6 @@ import java.util.concurrent.Semaphore;
 
 public class Rider implements Runnable{
 
-    private int waiting = 0;
     private final Semaphore mutex;
     private final Semaphore bus;
     private final Semaphore boarded;
@@ -19,7 +18,7 @@ public class Rider implements Runnable{
     public void run() {
         try {
             mutex.acquire();
-            waiting++;
+            Config.incrementWaiting();
             mutex.release();
 
             bus.acquire();
