@@ -20,10 +20,10 @@ public class BusFactory implements Runnable{
 
     @Override
     public void run() {
-        int bus_count = 0;
+        int bus_count = 1;
         while (true) {
             try {
-                Bus arriveBus = new Bus(mutex, bus, boarded);
+                Bus arriveBus = new Bus(mutex, bus, boarded, bus_count);
                 (new Thread(arriveBus)).start();
                 bus_count++;
                 Thread.sleep(Util.getArrivalTime(Config.BUS_ARRIVAL_MEAN_TIME));
@@ -33,6 +33,7 @@ public class BusFactory implements Runnable{
             }
 
             if (Thread.currentThread().isInterrupted()){
+                System.out.println("All buses have arrived");
                 break;
             }
         }

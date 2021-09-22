@@ -19,11 +19,11 @@ public class RiderFactory implements Runnable{
 
     @Override
     public void run() {
-        int rider_count = 0;
+        int rider_count = 1;
 
         while (true){
             try {
-                Rider rider = new Rider(mutex, bus, boarded);
+                Rider rider = new Rider(mutex, bus, boarded, rider_count);
                 (new Thread(rider)).start();
                 rider_count++;
                 Thread.sleep(Util.getArrivalTime(Config.RIDER_ARRIVAL_MEAN_TIME));

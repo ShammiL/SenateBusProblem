@@ -9,9 +9,9 @@ public class Config {
     public static final float RIDER_ARRIVAL_MEAN_TIME = 30f * 1000;
     public static final float BUS_ARRIVAL_MEAN_TIME = 20 * 60f * 1000;
 
-    private static final Semaphore MUTEX = new Semaphore(1);
-    private static final Semaphore BUS = new Semaphore(0);
-    private static final Semaphore BOARDED = new Semaphore(0);
+    public static final Semaphore MUTEX = new Semaphore(1);
+    public static final Semaphore BUS = new Semaphore(0);
+    public static final Semaphore BOARDED = new Semaphore(0);
 
     public static int getWaiting() {
         return waiting;
