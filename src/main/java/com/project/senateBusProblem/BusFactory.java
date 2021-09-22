@@ -5,7 +5,6 @@ import java.util.concurrent.Semaphore;
 
 public class BusFactory implements Runnable{
 
-    private float meanTime = 2 * 60f * 1000;
     private final Semaphore mutex;
     private final Semaphore bus;
     private final Semaphore boarded;
@@ -21,18 +20,22 @@ public class BusFactory implements Runnable{
 
     @Override
     public void run() {
+        int bus_count = 0;
         while (true) {
             try {
                 Bus arriveBus = new Bus(mutex, bus, boarded);
                 (new Thread(arriveBus)).start();
-
-                Thread.sleep(Util.getArrivalTime(meanTime));
+                bus_count++;
+                Thread.sleep(Util.getArrivalTime(Config.BUS_ARRIVAL_MEAN_TIME));
 
             }catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            if (Thread.currentThread().isInterrupted()){
+                break;
+            }
         }
-//        System.out.println("All busses have arrived");
     }
 
 
